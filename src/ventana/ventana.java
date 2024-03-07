@@ -844,6 +844,7 @@ public class ventana extends JFrame {
 		int xS [] = {350,250,450};
 		int yS [] = {250,300,300};
 		
+		
 		g2d.fillArc(200, 200, 100, 100, 0, 50);
 		
 		g2d.setColor(Color.red);
