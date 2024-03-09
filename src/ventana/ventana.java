@@ -1,6 +1,11 @@
 package ventana;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import com.toedter.calendar.JDateChooser;
 
@@ -21,7 +26,7 @@ public class ventana extends JFrame {
 		// this.setSize(313, 550);
 		// this.setSize(700,525);
 		// this.setSize(510, 410);
-		this.setSize(900, 600);
+		this.setSize(1200, 700);
 
 		// this.setTitle("Bienvenido");
 		// this.setTitle("Calculadora");
@@ -837,7 +842,195 @@ public class ventana extends JFrame {
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
+		g2d.setColor(Color.decode("#A2F0FF"));
+		g2d.fillRect(0, 0, 1200, 700);
 		
+		g2d.setColor(Color.black);
+		g2d.fillRoundRect(465, 235, 261, 397, 20, 20);
+		g2d.setColor(Color.decode("#0081DF"));
+		g2d.fillRoundRect(420, 200, 261, 397, 20, 20);
+		g2d.setColor(Color.decode("#71C2FF"));
+		g2d.fillRoundRect(420, 200, 250, 388, 20, 20);
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRoundRect(422, 200, 260, 397, 20, 20);
+		
+		g2d.setColor(Color.black);
+		g2d.fillRoundRect(310, 390, 260, 250, 20, 20);
+		g2d.setColor(Color.decode("#FF765E"));
+		g2d.fillRoundRect(260, 346, 260, 250, 20, 20);
+		g2d.setColor(Color.decode("#FFC0B5"));
+		g2d.fillRoundRect(260, 346, 249, 238, 20, 20);
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRoundRect(260, 346, 260, 250, 20, 20);
+		
+		g2d.setColor(Color.decode("#178814"));
+		g2d.fillRect(800, 410, 150, 250);
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRect(800, 410, 150, 250);
+		
+		g2d.setColor(Color.decode("#178814"));
+		g2d.fillRect(780, 347, 190, 60);
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRect(780, 347, 190, 60);
+		
+		
+		g2d.setColor(Color.black);
+		g2d.fillRoundRect(1000, 390, 260, 250, 20, 20);
+		g2d.setColor(Color.decode("#24A63E"));
+		g2d.fillRoundRect(1000, 346, 260, 250, 20, 20);
+		g2d.setColor(Color.decode("#51D96B"));
+		g2d.fillRoundRect(1000, 346, 249, 238, 20, 20);
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRoundRect(1000, 346, 260, 250, 20, 20);
+		
+		
+		g2d.setColor(Color.decode("#C8C8C8"));
+		g2d.fillRoundRect(270, 355, 25, 25, 20, 20);
+		g2d.fillRoundRect(485, 355, 25, 25, 20, 20);
+		g2d.fillRoundRect(270, 562, 25, 25, 20, 20);
+		g2d.fillRoundRect(485, 562, 25, 25, 20, 20);
+		
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRoundRect(270, 355, 25, 25, 20, 20);
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRoundRect(485, 355, 25, 25, 20, 20);
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRoundRect(270, 562, 25, 25, 20, 20);
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRoundRect(485, 562, 25, 25, 20, 20);
+		
+		g2d.setColor(Color.decode("#C8C8C8"));
+		g2d.fillRoundRect(1010, 355, 25, 25, 20, 20);
+		g2d.fillRoundRect(1010, 562, 25, 25, 20, 20);
+		
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRoundRect(1010, 355, 25, 25, 20, 20);
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRoundRect(1010, 562, 25, 25, 20, 20);
+		
+		g2d.setColor(Color.decode("#C8C8C8"));
+		g2d.fillRoundRect(432, 210, 25, 25, 20, 20);
+		g2d.fillRoundRect(648, 210, 25, 25, 20, 20);
+		g2d.fillRoundRect(648, 562, 25, 25, 20, 20);
+		
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRoundRect(432, 210, 25, 25, 20, 20);
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRoundRect(648, 210, 25, 25, 20, 20);
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawRoundRect(648, 562, 25, 25, 20, 20);
+		
+		g2d.setColor(Color.decode("#FF9062"));
+		g2d.fillRect(50, 250, 70, 70);
+		g2d.setColor(Color.black);
+		g2d.drawRect(50, 250, 70, 70);
+		
+		g2d.setColor(Color.decode("#FF9062"));
+		g2d.fillRect(1060, 160, 70, 70);
+		g2d.setColor(Color.black);
+		g2d.drawRect(1060, 160, 70, 70);
+		
+		g2d.setColor(Color.decode("#FF9062"));
+		g2d.fillRect(210, 80, 70, 70);
+		g2d.setColor(Color.black);
+		g2d.drawRect(210, 80, 70, 70);
+		g2d.setColor(Color.decode("#FF9062"));
+		g2d.fillRect(284, 80, 70, 70);
+		g2d.setColor(Color.black);
+		g2d.drawRect(284, 80, 70, 70);
+		
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(57, 257, 57, 259);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(113, 257, 113, 259);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(57, 310, 57, 312);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(113, 310, 113, 312);
+		
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(218, 88, 218, 90);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(218, 141, 218, 143);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(272, 88, 272, 90);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(272, 141, 272, 143);
+		
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(292, 88, 292, 90);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(292, 141, 292, 143);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(346, 88, 346, 90);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(346, 141, 346, 143);
+		
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(1068, 167, 1068, 169);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(1068, 220, 1068, 222);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(1122, 167, 1122, 169);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(1122, 220, 1122, 222);
+		
+		
+		
+		
+		try {
+			BufferedImage imagen = ImageIO.read(new File("C:/Users/inghe/eclipse-workspace/Ventana/src/ventana/mario.png"));
+			
+			g2d.drawImage(imagen, 625, 491, null);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			BufferedImage imagen = ImageIO.read(new File("C:/Users/inghe/eclipse-workspace/Ventana/src/ventana/bush.png"));
+			
+			g2d.drawImage(imagen, 45, 516, null);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			BufferedImage imagen = ImageIO.read(new File("C:/Users/inghe/eclipse-workspace/Ventana/src/ventana/plant.png"));
+			
+			g2d.drawImage(imagen, 820, 150, null);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		g2d.setColor(Color.decode("#F4C7B9"));
+		g2d.fillRect(50, 600, 1200, 95);
+		
+		g2d.setColor(Color.decode("#F39E84"));
+		g2d.fillRect(50, 630, 1200, 65);
+		
+		g2d.setColor(Color.black);
+		g2d.setStroke(new BasicStroke(4));
+		g2d.drawLine(52, 600, 1200, 600);
+		g2d.drawLine(52, 630, 1200, 630);
+		/*
 		g2d.setColor(Color.decode("#70FFEB"));
 		 g2d.fillRect(0, 0, 900, 600);
 		 
