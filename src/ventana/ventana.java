@@ -1,12 +1,16 @@
 package ventana;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 import com.toedter.calendar.JDateChooser;
 
 public class ventana extends JFrame {
@@ -22,16 +26,16 @@ public class ventana extends JFrame {
 		// this.setLayout(null);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// this.setSize(1000, 700);
+		//this.setSize(1000, 700);
 		// this.setSize(313, 550);
 		// this.setSize(700,525);
 		// this.setSize(510, 410);
-		this.setSize(800, 600);
+		this.setSize(1000, 700);
 
 		// this.setTitle("Bienvenido");
 		// this.setTitle("Calculadora");
-		// this.setTitle("User Login");
-		this.setTitle("Casa");
+		this.setTitle("User Login");
+		//this.setTitle("Casa");
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setMinimumSize(new Dimension(300, 300));
@@ -43,8 +47,8 @@ public class ventana extends JFrame {
 	public void loadComponents() {
 		// this.calculadora_layout();
 		// this.login_2();
-		// this.login();
-		// this.register();
+		this.login();
+		this.register();
 		// this.MenuVentana();
 		// this.admin();
 		// this.calculator();
@@ -79,6 +83,30 @@ public class ventana extends JFrame {
 
 		JButton login_btn = new JButton("Continuar");
 		login_btn.setBounds(153, 280, 180, 30);
+		login_btn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(texto.getText().length() <= 0) {
+					texto.setBorder(new LineBorder(Color.red, 4));
+				} else {
+					texto.setBorder(new LineBorder(Color.green, 4));
+					System.out.println("Usuario: "+texto.getText());
+				}
+				
+				String contrasenia = new String(contrasena.getPassword());
+				
+				if (contrasenia.length() <= 0) {
+					contrasena.setBorder(new LineBorder(Color.red, 4));
+				} else {
+					contrasena.setBorder(new LineBorder(Color.green, 4));
+					System.out.print("Contrasena: ");
+					System.out.println(contrasena.getPassword());
+				}
+				
+			}
+			
+		});
 		getContentPane().add(login_btn);
 
 		/*
@@ -88,7 +116,7 @@ public class ventana extends JFrame {
 		 */
 
 		JPanel login = new JPanel();
-		login.setSize(this.getWidth()/* / 2 */, this.getHeight());
+		login.setSize(this.getWidth() / 2 , this.getHeight());
 		login.setBackground(Color.LIGHT_GRAY);
 		getContentPane().add(login);
 		repaint();
@@ -98,77 +126,114 @@ public class ventana extends JFrame {
 
 		JTextField ingresarNombre = new JTextField();
 		ingresarNombre.setBounds(530, 135, 300, 30);
-		getContentPane().add(ingresarNombre);
+		add(ingresarNombre);
 
-		JTextField contra = new JTextField();
+		JPasswordField contra = new JPasswordField();
 		contra.setBounds(530, 210, 300, 30);
-		getContentPane().add(contra);
+		add(contra);
 
 		JLabel tituloRegistro = new JLabel("Registrate");
 		tituloRegistro.setFont(new Font("Namecat", Font.BOLD, 40));
 		tituloRegistro.setBounds(630, -85, 300, 300);
-		getContentPane().add(tituloRegistro);
+		add(tituloRegistro);
 
 		JLabel ingresarContra = new JLabel("Ingrese su contrasena:");
 		ingresarContra.setFont(new Font("Namecat", Font.ITALIC, 13));
 		ingresarContra.setBounds(530, 45, 300, 300);
-		getContentPane().add(ingresarContra);
+		add(ingresarContra);
 
 		JLabel ingresarUsuario = new JLabel("Ingrese su nombre de usuario:");
 		ingresarUsuario.setFont(new Font("Namecat", Font.ITALIC, 13));
 		ingresarUsuario.setBounds(530, -30, 300, 300);
-		getContentPane().add(ingresarUsuario);
+		add(ingresarUsuario);
 
 		JLabel ingresarSexo = new JLabel("Seleccione su sexo:");
 		ingresarSexo.setFont(new Font("Namecat", Font.ITALIC, 13));
 		ingresarSexo.setBounds(530, 125, 300, 300);
-		getContentPane().add(ingresarSexo);
+		add(ingresarSexo);
 
 		JLabel direccion = new JLabel("Direccion de domicilio:");
 		direccion.setFont(new Font("Namecat", Font.ITALIC, 13));
 		direccion.setBounds(530, 215, 300, 300);
-		getContentPane().add(direccion);
+		add(direccion);
 
 		JLabel txt_pais = new JLabel("Pais de domicilio:");
 		txt_pais.setFont(new Font("Namecat", Font.ITALIC, 13));
 		txt_pais.setBounds(530, 260, 300, 300);
-		getContentPane().add(txt_pais);
-
-		JButton confirm_btn = new JButton("Confirmar");
-		confirm_btn.setBounds(550, 580, 180, 30);
-		getContentPane().add(confirm_btn);
-
-		JButton cancel_btn = new JButton("Cancelar");
-		cancel_btn.setBounds(750, 580, 180, 30);
-		getContentPane().add(cancel_btn);
-
+		add(txt_pais);
+		
 		String Pais[] = { "Mexico", "Estados Unidos", "Canada", "Colombia", "Venezuela" };
-
+		
 		JComboBox caja = new JComboBox(Pais);
 		caja.setBounds(650, 400, 150, 20);
-		getContentPane().add(caja);
-
+		add(caja);
+		
 		JRadioButton tipoM = new JRadioButton("Masculino");
 		tipoM.setBounds(530, 285, 100, 30);
 		tipoM.setFont(new Font("Namecat", Font.ITALIC, 13));
 		tipoM.setOpaque(false);
 		getContentPane().add(tipoM);
-
+		
 		JRadioButton tipoF = new JRadioButton("Femenino");
 		tipoF.setBounds(620, 285, 100, 30);
 		tipoF.setFont(new Font("Namecat", Font.ITALIC, 13));
 		tipoF.setOpaque(false);
 		getContentPane().add(tipoF);
-
+		
 		ButtonGroup grupo = new ButtonGroup();
 		grupo.add(tipoM);
 		grupo.add(tipoF);
+
+		JButton confirm_btn = new JButton("Confirmar");
+		confirm_btn.setBounds(550, 580, 180, 30);
+		getContentPane().add(confirm_btn);
+		
+		confirm_btn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				if(ingresarNombre.getText().length() <= 0) {
+					ingresarNombre.setBorder(new LineBorder(Color.red, 4));
+				} else {
+					ingresarNombre.setBorder(new LineBorder(Color.green, 4));
+					System.out.println("Usuario: "+ingresarNombre.getText());
+				}
+				
+				String contrasenia = new String(contra.getPassword());
+				
+				if (contrasenia.length() <= 0) {
+					contra.setBorder(new LineBorder(Color.red, 4));
+				} else {
+					contra.setBorder(new LineBorder(Color.green, 4));
+					System.out.print("Contrasena: ");
+					System.out.println(contra.getPassword());
+				}
+				
+				if(tipoM.isSelected() == false && tipoF.isSelected() == false) {
+					tipoM.setBorderPainted(true);
+					tipoM.setBorder(new LineBorder(Color.red, 4));
+					tipoF.setBorderPainted(true);
+					tipoF.setBorder(new LineBorder(Color.red, 4));
+				} else {
+					tipoM.setBorderPainted(true);
+					tipoM.setBorder(new LineBorder(Color.green, 4));
+					tipoF.setBorderPainted(true);
+					tipoF.setBorder(new LineBorder(Color.green, 4));
+				}
+			}
+		});
+
+		JButton cancel_btn = new JButton("Cancelar");
+		cancel_btn.setBounds(750, 580, 180, 30);
+		getContentPane().add(cancel_btn);
+
 
 		JPanel registro = new JPanel();
 		registro.setSize(this.getWidth(), this.getHeight());
 		registro.setLocation(this.getWidth() / 2, 0);
 		registro.setBackground(Color.decode("#FAFFA8"));
-		getContentPane().add(registro);
+		add(registro);
 		repaint();
 
 	}
@@ -837,7 +902,7 @@ public class ventana extends JFrame {
 
 		repaint();
 	}
-
+/*
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
@@ -964,10 +1029,6 @@ public class ventana extends JFrame {
 		g2d.setColor(Color.black);
 		g2d.drawLine(0, 500, 800, 500);
 		
-		
-		
-		
-		
 		try {
 			BufferedImage imagen = ImageIO.read(new File("C:/Users/inghe/eclipse-workspace/Ventana/src/ventana/arbusto.png"));
 			
@@ -985,6 +1046,7 @@ public class ventana extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		/*
 		g2d.setColor(Color.black);
 		g2d.fillRoundRect(465, 235, 261, 397, 20, 20);
@@ -1298,4 +1360,3 @@ public class ventana extends JFrame {
 		*/
 
 	}
-}
