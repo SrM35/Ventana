@@ -53,9 +53,20 @@ public class Ventana2 extends JFrame{
 				int valorG = rand.nextInt(255);
 				int valorB = rand.nextInt(255);
 				
-				JButton btn = new JButton("Hola Mundo");
+				JButton btn = new JButton(""+valorR+valorG+valorB);
 				btn.setBounds(valorX, valorY, valorW, valorH);
 				btn.setBackground(new Color(valorR, valorG, valorB));
+				btn.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if(e.getSource() != null) {
+						JOptionPane.showMessageDialog(null, btn.getText());	
+						}
+						
+					}
+					
+				});
 				add(btn);
 				btn.updateUI();
 				
