@@ -40,28 +40,20 @@ public class Ventana2 extends JFrame{
 	public void boton() {
 		Random rand = new Random();
 		
+		JPanel fondo = new JPanel();
+		fondo.setBounds(0, 0, 700, 700);
+		fondo.setLayout(null);
+		fondo.setBackground(Color.GREEN);
+		add(fondo);
+		
 		JButton boton = new JButton("Puchame!");
 		boton.setBounds(225, 500, 200, 90);
 		boton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-			}
-			
-		});
-		getContentPane().add(boton);
-		
-		JPanel fondo = new JPanel();
-		fondo.setBounds(0, 0, 700, 700);
-		fondo.setBackground(Color.GREEN);
-		
-		MouseListener oyenteRaton = new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				//int valorX = rand.nextInt(650);
-				//int valorY = rand.nextInt(650);
+				int valorX = rand.nextInt(650);
+				int valorY = rand.nextInt(650);
 				int valorW = rand.nextInt(200);
 				int valorH = rand.nextInt(200);
 				
@@ -70,52 +62,47 @@ public class Ventana2 extends JFrame{
 				int valorB = rand.nextInt(255);
 				
 				JButton btn = new JButton(""+valorR+", "+valorG+", "+valorB);
-				btn.setBounds(e.getX(), e.getY(), valorW, valorH);
+				btn.setBounds(valorX, valorY, valorW, valorH);
 				btn.setBackground(new Color(valorR, valorG, valorB));
-				btn.addActionListener(new ActionListener() {
+				btn.addMouseListener(new MouseListener() {
 
 					@Override
-					public void actionPerformed(ActionEvent e) {
-						if(e.getSource() != null) {
-						JOptionPane.showMessageDialog(null, btn.getText());	
-						}
+					public void mouseClicked(MouseEvent e) {
+						fondo.remove(btn);
+						fondo.repaint();
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
 						
 					}
 					
 				});
-				getContentPane().add(btn);
+				fondo.add(btn);
 				btn.updateUI();
-				
-				
 			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}};
-		
-		addMouseListener(oyenteRaton);
-		add(fondo);
-		
+			
+		});
+		fondo.add(boton);
 	}
 	
 }
