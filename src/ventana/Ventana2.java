@@ -5,6 +5,8 @@ import java.awt.*;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -76,10 +78,15 @@ public class Ventana2 extends JFrame{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JButton btn = new JButton("hola mundo");
+				int valorR = rand.nextInt(255);
+				int valorG = rand.nextInt(255);
+				int valorB = rand.nextInt(255);
 				int valorW = rand.nextInt(200);
 				int valorH = rand.nextInt(200);
+				
+				JButton btn = new JButton(""+valorR+", "+valorG+", "+valorB);
 				btn.setBounds(e.getX(), e.getY(), valorW, valorH);
+				btn.setBackground(new Color(valorR, valorG, valorB));
 				fondo.add(btn);
 				btn.repaint();
 			}
@@ -141,6 +148,33 @@ public class Ventana2 extends JFrame{
 			}
 			
 		});
+		
+		KeyListener tecla = new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if(e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+					fondo.removeAll();
+					repaint();
+				}
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		
+		addKeyListener(tecla);
+		
 		fondo.add(boton);
 	}
 	
