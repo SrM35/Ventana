@@ -44,6 +44,47 @@ public class Ventana2 extends JFrame{
 		fondo.setBounds(0, 0, 700, 700);
 		fondo.setLayout(null);
 		fondo.setBackground(Color.GREEN);
+		fondo.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				int valorR = rand.nextInt(255);
+				int valorG = rand.nextInt(255);
+				int valorB = rand.nextInt(255);
+				fondo.setBackground(new Color(valorR,valorG,valorB));
+				repaint();
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JButton btn = new JButton("hola mundo");
+				int valorW = rand.nextInt(200);
+				int valorH = rand.nextInt(200);
+				btn.setBounds(e.getX(), e.getY(), valorW, valorH);
+				fondo.add(btn);
+				btn.repaint();
+			}
+		});
+		
 		add(fondo);
 		
 		JButton boton = new JButton("Puchame!");
@@ -86,13 +127,11 @@ public class Ventana2 extends JFrame{
 
 					@Override
 					public void mouseEntered(MouseEvent e) {
-						// TODO Auto-generated method stub
 						
 					}
 
 					@Override
 					public void mouseExited(MouseEvent e) {
-						// TODO Auto-generated method stub
 						
 					}
 					
