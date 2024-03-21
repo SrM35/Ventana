@@ -155,9 +155,21 @@ public class Ventana2 extends JFrame{
 			public void keyTyped(KeyEvent e) {
 				if(e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
 					fondo.removeAll();
-					repaint();
+					fondo.repaint();
+					
+				}else if(e.getKeyChar() == 'w') {
+					Component arreglo[] = fondo.getComponents();
+					
+					for(int i = 0; i < arreglo.length; i++) {
+						if(arreglo[i].getClass().toString().equals("class javax.swing.JButton")) {
+							JButton link = (JButton) arreglo[i];
+							
+							link.setSize(link.getWidth()+5, link.getHeight()+5);
+							repaint();
+							revalidate();
+						}
+					}
 				}
-				
 			}
 			
 			@Override
