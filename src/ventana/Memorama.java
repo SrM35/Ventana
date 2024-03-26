@@ -3,26 +3,31 @@ package ventana;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-
-import javax.swing.JButton;
+import javax.swing.JPanel;
 import java.awt.GridLayout;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.Random;
 
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class Memorama extends JFrame{
+import java.awt.Font;
 
-	public int tablero[][] = {{1,2,3,4},{1,2,3,4}};
-	public int status[][] = {{1,2,3,4},{1,2,3,4}};
-	
+public class Memorama extends JFrame {
 	private JFrame frame;
+	int tablero[][] = new int[2][4];
+	int tablero2[][] = new int[2][4];
+	JButton matriz[][];
+	int contador = 0;
+	int bX, aX, bY, aY;
+	int puntos=0;
+	Random rand = new Random();
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -35,183 +40,159 @@ public class Memorama extends JFrame{
 			}
 		});
 	}
-	
+
 	public Memorama() {
 		initialize();
+		numerosAleatorios();
 	}
 
 	private void initialize() {
+
 		frame = new JFrame();
-		frame.setBounds(100, 100, 716, 510);
+		frame.setBounds(100, 100, 694, 735);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 255, 128));
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
-		
+
+		JLabel lblNewLabel = new JLabel("Puntos: "+puntos);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel.add(lblNewLabel);
+
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(255, 255, 128));
 		frame.getContentPane().add(panel_1, BorderLayout.SOUTH);
+
 		
-		JButton btnNewButton_8 = new JButton("New button");
-		panel_1.add(btnNewButton_8);
-		
+
 		JPanel panel_2 = new JPanel();
 		frame.getContentPane().add(panel_2, BorderLayout.CENTER);
 		panel_2.setLayout(new GridLayout(2, 4, 0, 0));
+
+		// botones
+
+		matriz = new JButton[2][4];
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 4; j++) {
+				matriz[i][j] = new JButton();
+				matriz[i][j].setIcon(new ImageIcon("C:\\Users\\inghe\\eclipse-workspace\\Ventana\\src\\ventana\\ascacascacas.png"));
+				matriz[i][j].addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						for (int k = 0; k < 2; k++) {
+							for (int l = 0; l < 4; l++) {
+
+								if (e.getSource() == matriz[k][l]) {
+									if (tablero2[k][l] == 0 && contador != 2) {
+										tablero2[k][l] = tablero[k][l]; 
+										contador++;
+										aX = k;
+										aY = l;
+										girar(matriz[k][l], aX, aY);
+
+										if (contador == 1) {
+											bX = k;
+											bY = l;
+											girar(matriz[k][l], bX, bY);
+											
+										}
+
+										if (contador == 2) {
+											if (tablero2[aX][aY] == tablero2[bX][bY]) {
+												JOptionPane.showMessageDialog(null, "Es par, +1 punto");
+												puntos++;
+												lblNewLabel.setText("Puntos: "+puntos);
+												contador=0;
+											} else {
+												JOptionPane.showMessageDialog(null, "No es par, lo siento");
+												regresar(matriz[aX][aY], matriz[bX][bY]);
+												contador=0;
+											}
+										}
+
+									}
+								}
+							}
+						}
+
+					}
+
+				});
+				panel_2.add(matriz[i][j]);
+				panel.repaint();
+				lblNewLabel.repaint();
+			}
+		}
 		
-		JButton btnNewButton_1 = new JButton(" ");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnNewButton_8 = new JButton("Reinicio");
+		btnNewButton_8.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				girar(0,0, btnNewButton_1);
+				for (int i = 0; i < 2; i++) {
+					for (int j = 0; j < 4; j++) {
+						regresar(matriz[i][j]);
+						puntos = 0;
+						lblNewLabel.setText("Puntos: "+puntos);
+					}
+				}
 			}
-			
-		});
-		
-		JButton btnNewButton = new JButton(" ");
-		btnNewButton.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				girar(1,0, btnNewButton);
-				
-			}
-			
 		});
-		panel_2.add(btnNewButton);
-		panel_2.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton(" ");
-		btnNewButton_2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				girar(0,1, btnNewButton_2);
-				
-			}
-			
-		});
-		panel_2.add(btnNewButton_2);
-		
-		JButton btnNewButton_4 = new JButton(" ");
-		btnNewButton_4.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				girar(0,2, btnNewButton_4);
-				
-			}
-			
-		});
-		
-		JButton btnNewButton_3 = new JButton(" ");
-		btnNewButton_3.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				girar(1,1, btnNewButton_3);
-				
-			}
-			
-		});
-		panel_2.add(btnNewButton_3);
-		panel_2.add(btnNewButton_4);
-		
-		JButton btnNewButton_6 = new JButton(" ");
-		btnNewButton_6.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				girar(0,3, btnNewButton_6);
-				
-			}
-			
-		});
-		
-		JButton btnNewButton_5 = new JButton(" ");
-		btnNewButton_5.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				girar(1,2, btnNewButton_5);
-				
-			}
-			
-		});
-		panel_2.add(btnNewButton_5);
-		panel_2.add(btnNewButton_6);
-		
-		JButton btnNewButton_7 = new JButton(" ");
-		btnNewButton_7.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				girar(1,3, btnNewButton_7);
-				
-			}
-			
-		});
-		panel_2.add(btnNewButton_7);
+		panel_1.add(btnNewButton_8);
+	}
+	
+	
+	
+	public void girar(JButton btn, int x, int y) {
+		btn.setIcon(new ImageIcon("C:\\Users\\inghe\\eclipse-workspace\\Ventana\\src\\ventana\\"+tablero2[x][y]+".png"));
+		btn.setEnabled(false);
+	}
+	
+	public void regresar(JButton btn, JButton btn2) {
+		btn.setIcon(new ImageIcon("C:\\Users\\inghe\\eclipse-workspace\\Ventana\\src\\ventana\\ascacascacas.png"));
+		btn2.setIcon(new ImageIcon("C:\\Users\\inghe\\eclipse-workspace\\Ventana\\src\\ventana\\ascacascacas.png"));
+		btn.setEnabled(true);
+		btn2.setEnabled(true);
 		
 	}
-	public void girar(int x, int y, JButton btn) {
-		status[x][y] = 1;
-		btn.setEnabled(false);
-		int tarjetas=0;
-		
-		for(int i = 0; i <2; i++) {
-			for(int j = 0; j <4; j++) {
-				if(status[i][j] == 1) {
-					tarjetas++;
-				}
+	public void regresar(JButton btn) {
+		btn.setIcon(new ImageIcon("C:\\Users\\inghe\\eclipse-workspace\\Ventana\\src\\ventana\\ascacascacas.png"));
+		btn.setEnabled(true);
+	}
+
+	public void numerosAleatorios() {
+		int contador = 0;
+
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 4; j++) {
+				tablero[i][j] = 0;
 			}
 		}
-		System.out.println(tarjetas);
-		
-		if(tarjetas==2) {
-			System.out.println("verificar pares");
-			int a=0;
-			int b=0;
-			
-			for(int i = 0; i <2; i++) {
-				for(int j = 0; j <4; j++) {
-					if(status[i][j] == 1) {
-						if(a == 0) {
-							a = tablero[i][j];
-						}else if(b == 0) {
-							b = tablero[i][j];
+
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 4; j++) {
+				tablero[i][j] = rand.nextInt(4) + 1;
+
+				do {
+					contador = 0;
+					for (int k = 0; k < 2; k++) {
+						for (int l = 0; l < 4; l++) {
+							if (tablero[i][j] == tablero[k][l]) {
+								contador += 1;
+							}
 						}
 					}
-				}
-			}
-			
-			if(a == b && a!=0) {
-				System.out.println("pares");
-				
-				for(int i = 0; i <2; i++) {
-					for(int j = 0; j <4; j++) {
-						
-						if(status[i][j] == 1) {
-							status[i][j] = 2;
-						}
+
+					if (contador == 3) {
+						tablero[i][j] = rand.nextInt(4) + 1;
 					}
-				}
-			} else {
-				System.out.println("no pares");
-				
-				for(int i = 0; i <2; i++) {
-					for(int j = 0; j <4; j++) {
-						
-						if(status[i][j] == 1) {
-							status[i][j] = 0;
-						}
-					}
-				}
-				
+				} while (contador == 3);
+
 			}
 		}
+
 	}
 
 }
