@@ -27,7 +27,8 @@ public class TecladoDigital extends JFrame{
 	private JFrame frame;
 	private JTextField textField;
 	Random random = new Random();
-
+	int indiceAleatorio = random.nextInt(listaPalabras.length);
+	
 	String[] palabras = new String[100];
 	private static String[] listaPalabras = {
 	        "Hola", "Mundo", "Java", "Programacion", "Computadora",
@@ -63,6 +64,7 @@ public class TecladoDigital extends JFrame{
 	 * Create the application.
 	 */
 	public TecladoDigital() {
+		reglas();
 		initialize();
 		repaint();
 	}
@@ -80,13 +82,6 @@ public class TecladoDigital extends JFrame{
 		panel.setBorder(null);
 		panel.setBackground(new Color(0, 0, 0));
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
-		int indiceAleatorio = random.nextInt(listaPalabras.length);
-		
-		for(int i = 0; i < palabras.length; i++) {
-            palabras[i] = listaPalabras[indiceAleatorio];
-		}
-		
-		System.out.println(palabras[indiceAleatorio]);
 		
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
@@ -99,12 +94,6 @@ public class TecladoDigital extends JFrame{
 		panel_3.setBackground(new Color(0, 0, 0));
 		panel_1.add(panel_3, BorderLayout.NORTH);
 		panel_3.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNewLabel = new JLabel("Escribe : " + palabras[indiceAleatorio]);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setForeground(new Color(0, 255, 0));
-		panel_3.add(lblNewLabel);
 		
 		JPanel panel_6_2 = new JPanel();
 		panel_6_2.setBackground(Color.BLACK);
@@ -352,6 +341,17 @@ public class TecladoDigital extends JFrame{
 		btnNewButton_1_29.setBackground(Color.BLACK);
 		panel_1_1.add(btnNewButton_1_29);
 		
+		for(int i = 0; i < palabras.length; i++) {
+			indiceAleatorio = random.nextInt(listaPalabras.length);
+            palabras[i] = listaPalabras[indiceAleatorio];
+		}
+		
+		JLabel lblNewLabel = new JLabel("Escribe : " + palabras[indiceAleatorio]);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setForeground(new Color(0, 255, 0));
+		panel_3.add(lblNewLabel);
+		
 		JTextField textField_1 = new JTextField();
 		textField_1.setEditable(false);
 		textField_1.setForeground(new Color(0, 255, 0));
@@ -364,13 +364,16 @@ public class TecladoDigital extends JFrame{
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if(e.getKeyChar() == KeyEvent.VK_ENTER) {					
+				if(e.getKeyChar() == KeyEvent.VK_ENTER) {
 					String textoExtraido = textField_1.getText();
 					String palabra = palabras[indiceAleatorio];
 					
 					if(palabra.equals(textoExtraido)) {
 						JOptionPane.showMessageDialog(null, "Correcto, +1 Punto");
 						textField_1.setText("");
+						indiceAleatorio = random.nextInt(listaPalabras.length);
+						lblNewLabel.setText("Palabra: "+palabras[indiceAleatorio]);
+						lblNewLabel.repaint();
 					} else {
 						JOptionPane.showMessageDialog(null, "No es igual, intentalo denuevo");
 						textField_1.setText("");
@@ -753,7 +756,6 @@ public class TecladoDigital extends JFrame{
 		panel.setLayout(new BorderLayout(0, 0));
 		panel.add(textField_1, BorderLayout.CENTER);
 		
-		
 		JPanel panel_3_1 = new JPanel();
 		panel_3_1.setBackground(Color.BLACK);
 		panel.add(panel_3_1, BorderLayout.NORTH);
@@ -786,4 +788,10 @@ public class TecladoDigital extends JFrame{
 		panel.add(panel_6_1, BorderLayout.EAST);
 	}
 	
+	
+	public void reglas() {
+		JOptionPane.showMessageDialog(null, "1.Debes de completar las palabras que aparecen en la pantalla en un periodo de tiempo", "Instrucciones", 1);
+		JOptionPane.showMessageDialog(null, "2.Si aciertas la palabra ganas +1, si no, no ganas nada", "Instrucciones", 1);
+		JOptionPane.showMessageDialog(null, "3.Tu tiempo en escribir las palabras se capturará", "Instrucciones", 1);
+	}
 }
