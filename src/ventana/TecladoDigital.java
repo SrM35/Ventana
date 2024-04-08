@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
@@ -18,6 +20,8 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
@@ -27,7 +31,34 @@ public class TecladoDigital extends JFrame{
 	private JFrame frame;
 	private JTextField textField;
 	Random random = new Random();
+	Timer tiempo;
+	int segundos = 0;
+	int milisegundos = 0;
+	
 	int indiceAleatorio = random.nextInt(listaPalabras.length);
+	
+	JLabel lblNewLabel_1 = new JLabel("0.0");
+	
+	private void cronometro() {
+		tiempo = new Timer(10, (ActionEvent e) ->{
+			actualizarTiempo();
+			actualizarLabel();
+		});
+	}
+	
+	private void actualizarTiempo() {
+		milisegundos++;
+		
+		if(milisegundos == 100) {
+			milisegundos = 0;
+			segundos++;
+		}
+	}
+	
+	private void actualizarLabel() {
+		String cronometro = segundos+"."+milisegundos;
+		lblNewLabel_1.setText(cronometro);
+	}
 	
 	String[] palabras = new String[100];
 	private static String[] listaPalabras = {
@@ -36,15 +67,14 @@ public class TecladoDigital extends JFrame{
 	        "Base de datos", "Algoritmo", "Estructura de datos", "Inteligencia artificial",
 	        "Aprendizaje automatico", "Ciencia de datos", "Desarrollo web", "Diseño grafico",
 	        "Videojuegos", "Musica", "Arte", "Cultura", "Historia", "Geografia",
-	        "Matematicas", "Fisica", "Quimica", "Biologia", "Medicina",
+	        "Matematicas", "Supercalifragilisticoespiralidoso", "Quimica", "Biologia", "Medicina",
 	        "Economia", "Politica", "Sociologia", "Psicologia", "Filosofia",
-	        "Literatura", "Poesia", "Teatro", "Cine", "Television",
+	        "Literatura", "Picafresa", "Teatro", "Cine", "Television",
 	        "Deportes", "Juegos", "Pasatiempos", "Viajes", "Aventura",
 	        "Naturaleza", "Animales", "Plantas", "Comida", "Bebida",
 	        "Moda", "Belleza", "Salud", "Bienestar", "Hogar",
-	        "Familia", "Amigos", "Amor", "Relaciones", "Felicidad"
+	        "Chirimolla", "Amigos", "Amor", "Relaciones", "Felicidad"
 	    };
-	
 	
 	
 	public static void main(String[] args) {
@@ -67,13 +97,14 @@ public class TecladoDigital extends JFrame{
 		reglas();
 		initialize();
 		repaint();
+		cronometro();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
+	
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 757, 451);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -364,21 +395,7 @@ public class TecladoDigital extends JFrame{
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if(e.getKeyChar() == KeyEvent.VK_ENTER) {
-					String textoExtraido = textField_1.getText();
-					String palabra = palabras[indiceAleatorio];
-					
-					if(palabra.equals(textoExtraido)) {
-						JOptionPane.showMessageDialog(null, "Correcto, +1 Punto");
-						textField_1.setText("");
-						indiceAleatorio = random.nextInt(listaPalabras.length);
-						lblNewLabel.setText("Palabra: "+palabras[indiceAleatorio]);
-						lblNewLabel.repaint();
-					} else {
-						JOptionPane.showMessageDialog(null, "No es igual, intentalo denuevo");
-						textField_1.setText("");
-					}
-				}
+				
 			}
 
 			@Override
@@ -750,9 +767,26 @@ public class TecladoDigital extends JFrame{
 					btnNewButton_1_26 .setBackground(Color.black);
 					textField_1.repaint();
 				}
+				
+				String textoExtraido = textField_1.getText();
+				String palabra = palabras[indiceAleatorio];
+				
+				if(palabra.length() == textoExtraido.length() && palabra.equals(textoExtraido)) {
+					tiempo.stop();
+					JOptionPane.showMessageDialog(null, "Correcto, muy bien"+"\n\n"+"Tiempo: " + segundos+"."+milisegundos);
+					textField_1.setText("");
+					indiceAleatorio = random.nextInt(listaPalabras.length);
+					lblNewLabel.setText("Palabra: "+palabras[indiceAleatorio]);
+					reinicio();
+					lblNewLabel.repaint();
+				}
+				
+				tiempo.start();
 			}
 			
+			
 		});
+		
 		panel.setLayout(new BorderLayout(0, 0));
 		panel.add(textField_1, BorderLayout.CENTER);
 		
@@ -761,11 +795,11 @@ public class TecladoDigital extends JFrame{
 		panel.add(panel_3_1, BorderLayout.NORTH);
 		panel_3_1.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_1 = new JLabel("0.0");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_1.setForeground(new Color(0, 255, 0));
-		panel_3_1.add(lblNewLabel_1);
+		panel_3_1.add(lblNewLabel_1, BorderLayout.CENTER);
+		lblNewLabel_1.repaint();
 		
 		JPanel panel_6_4 = new JPanel();
 		panel_6_4.setBackground(Color.BLACK);
@@ -790,8 +824,18 @@ public class TecladoDigital extends JFrame{
 	
 	
 	public void reglas() {
-		JOptionPane.showMessageDialog(null, "1.Debes de completar las palabras que aparecen en la pantalla en un periodo de tiempo", "Instrucciones", 1);
-		JOptionPane.showMessageDialog(null, "2.Si aciertas la palabra ganas +1, si no, no ganas nada", "Instrucciones", 1);
-		JOptionPane.showMessageDialog(null, "3.Tu tiempo en escribir las palabras se capturará", "Instrucciones", 1);
+		JOptionPane.showMessageDialog(null, "Instrucciones:"+"\n\n"+"1. Debes de completar las palabras que aparecen en la pantalla en el menor tiempo posible"+"\n"+"2. Tu tiempo en escribir las palabras se capturará"+"\n"+"3. Cuando aciertas una palabra, se te dará una nueva para seguir jugando"+"\n\n"+"Buena suerte!!!", "Bienvenido!!!", 1);
 	}
+	
+	public void reinicio() {
+		if(tiempo.isRunning()) {
+			tiempo.stop();
+		}
+		
+		segundos = 0;
+		milisegundos = 0;
+		
+		actualizarLabel();
+	}
+
 }
