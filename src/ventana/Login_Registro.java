@@ -59,7 +59,7 @@ public class Login_Registro {
 		frame.setBounds(100, 100, 450, 431);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.login(frame);
+		this.registro(frame);
 	}
 	
 	private void login(JFrame frame) {
