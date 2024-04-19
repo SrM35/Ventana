@@ -25,8 +25,8 @@ import java.awt.event.ActionEvent;
 public class PacMan {
 
 	private JFrame frame;
-	int x = 250;
-	int y = 275;
+	Obstaculo obstaculo = new Obstaculo(60, 100, 20, 100, " ");
+	Player jugador = new Player(250, 270, 35, 35);
 	
 	/**
 	 * Launch the application.
@@ -84,7 +84,10 @@ public class PacMan {
 		        public void paintComponent(Graphics g) {
 		            super.paintComponent(g);
 		            g.setColor(Color.yellow);
-		            g.fillRoundRect(x, y, 35, 35, 50, 50);
+		            g.fillRoundRect(jugador.x, jugador.y,jugador.a, jugador.l, 50, 50);
+		            
+		            g.setColor(Color.gray);
+		            g.fillRect(obstaculo.x, obstaculo.y, obstaculo.a, obstaculo.l);
 		            
 		        }
 		};
@@ -98,27 +101,30 @@ public class PacMan {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
 				if(e.getKeyChar() == 'd') {
-					x+=2;
+					jugador.x+=10;
 					panel_4.repaint();
 				} else if(e.getKeyChar() == 'w') {
-					y-=2;
+					jugador.y-=10;
 					panel_4.repaint();
 				} else if(e.getKeyChar() == 'a') {
-					x-=2;
+					jugador.x-=10;
 					panel_4.repaint();
 				} else if(e.getKeyChar() == 's') {
-					y+=2;
+					jugador.y+=10;
 					panel_4.repaint();
 				}
 			}
 
 			@Override
-			public void keyPressed(KeyEvent e) {
-			}
-
-			@Override
 			public void keyReleased(KeyEvent e) {
+				obstaculo.seTocaron(obstaculo.x, obstaculo.y, obstaculo.a, obstaculo.l, jugador.x, jugador.y, jugador.a, jugador.l);
+				panel_4.repaint();
 			}
 			
 		});
@@ -131,8 +137,8 @@ public class PacMan {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				x = 250;
-				y = 275;
+				jugador.x = 250;
+				jugador.y = 270;
 				panel_4.repaint();
 			}
 
