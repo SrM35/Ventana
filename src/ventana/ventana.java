@@ -45,15 +45,15 @@ public class ventana extends JFrame {
 	}
 
 	public void loadComponents() {
-		// this.calculadora_layout();
+		//this.calculadora_layout();
 		// this.login_2();
 		this.login();
 		this.register();
-		// this.MenuVentana();
+		//this.MenuVentana();
 		// this.admin();
 		// this.calculator();
 		// this.calculadoraIntereses();
-		// this.registroUsuario();
+		 //this.registroUsuario();
 	}
 
 	public void login() {
@@ -254,6 +254,7 @@ public class ventana extends JFrame {
 		menu.add(menuItem3);
 
 		menuBar.add(menu);
+		menuBar.updateUI();
 	}
 
 	public void admin() {

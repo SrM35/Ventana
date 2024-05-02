@@ -1,16 +1,16 @@
 package ventana;
 
-public class Obstaculo {
+public class Pastilla {
 	int x;
 	int y;
 	int a;
 	int l;
-
-	public Obstaculo() {
-
+	
+	public Pastilla() {
+		
 	}
 
-	public Obstaculo(int x, int y, int a, int l) {
+	public Pastilla(int x, int y, int a, int l) {
 		this.x = x;
 		this.y = y;
 		this.a = a;
@@ -48,4 +48,6 @@ public class Obstaculo {
 	public void setL(int l) {
 		this.l = l;
 	}
+	
+	
 }

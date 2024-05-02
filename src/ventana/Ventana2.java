@@ -41,7 +41,7 @@ public class Ventana2 extends JFrame{
 	
 	public void boton() {
 		Random rand = new Random();
-		
+		System.out.println("20");
 		JPanel fondo = new JPanel();
 		fondo.setBounds(0, 0, 700, 700);
 		fondo.setLayout(null);
