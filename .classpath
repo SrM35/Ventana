@@ -10,6 +10,6 @@
 	<classpathentry kind="lib" path="jgoodies-common-1.2.0.jar"/>
 	<classpathentry kind="lib" path="jgoodies-looks-2.4.1.jar"/>
 	<classpathentry kind="lib" path="junit-4.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/inghe/Desktop/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/inghe/eclipse-workspace/Ventana/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
